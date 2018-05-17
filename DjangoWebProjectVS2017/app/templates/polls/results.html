@@ -1,0 +1,17 @@
+﻿{% extends "app/layout.html" %}
+{% block content %}
+
+<h2>{{ title }}.</h2>
+<h3>{{ message }}</h3>
+
+<h1>{{ question.question_text }}</h1>
+{% if bool %}
+    <label style="color:green;">{{ resultado }}</label>
+{% else %}
+    <label style="color:red;">{{ resultado }}</label>
+{% endif %}
+<br/>
+<a href="{% url 'detail' question.id %}"> Volver a intentar</a><br />
+<a href="{% url 'index' %}">Contestar otra pregunta?</a>
+
+{% endblock %}

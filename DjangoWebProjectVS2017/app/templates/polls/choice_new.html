@@ -1,0 +1,20 @@
+﻿{% extends "app/layout.html" %}
+{% block content %}
+
+<h2>{{ title }}.</h2>
+<h3>{{ message }}</h3>
+
+<h1>Insertar una opción</h1>
+        <form method="POST" onSubmit="confirmacion()" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+<a href="{% url 'index' %}">Ver preguntas</a> 
+{% if ans_count < 4 %}
+<script>
+    function confirmacion() {
+        alert("Pregunta introducida correctamente");
+    }
+</script>
+{% endif %}
+{% endblock %}

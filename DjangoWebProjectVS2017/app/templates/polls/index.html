@@ -1,0 +1,33 @@
+﻿{% extends "app/layout.html" %}
+{% block content %}
+
+<h2>{{ title }}.</h2>
+<h3>{{ message }}</h3>
+{% if themes %}
+<h3>Filtrar preguntas por tema:</h3>
+<form action="{% url 'index' %}" method="post">{% csrf_token %}
+    <select onchange="this.form.submit()" name="mythemes" id="mythemes">
+        <option value="">-----</option>
+    {% for theme in themes %}
+        <option value="{{theme.question_theme}}" {% if mytheme == theme.question_theme %}selected="selected"{% endif %}>{{theme.question_theme}}</option>
+    {% endfor %}
+    </select>
+</form>
+
+<br/><br/>
+{% endif %}
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+  
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+{% if request.user.is_authenticated %}
+<a href="{% url 'add' %}"><h2>Insertar pregunta</h2></a> 
+{% endif %}
+
+{% endblock %}
